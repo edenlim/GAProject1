@@ -20,13 +20,23 @@ var whitescreen = function(){
 var x = 0;
 var random = 0;
 var changefont = function(y){
-    random = Math.floor((Math.random()*10));
+    var num = fontList.length
+    random = Math.floor((Math.random()*num));
     while(x===random){
-        random = Math.floor((Math.random()*10));
+        random = Math.floor((Math.random()*num));
     }
     x = random;
     y.style.fontFamily = fontList[random];
-    counter++;
+}
+
+var changetext = function(y){
+    var num = redWordList.length;
+    random = Math.floor((Math.random()*num));
+    while(x===random){
+        random = Math.floor((Math.random()*num));
+    }
+    x = random;
+    y.innerHTML = redWordList[random];
 }
 
 //Clear function
@@ -43,8 +53,11 @@ var createBoard = function(){
     menured.addEventListener("click", clickonred);
 }
 
-var floattext = function(speedms,displacementpx,id){
+var floattext = function(speedms,displacementpx,id,currentColor){
     var text = document.getElementById(id);
+    if(currentColor === "red"){
+        text.innerHTML = "This is red."
+    }
     var position = 0;
     var move = setInterval(frame,speedms);
     function frame(){
@@ -93,11 +106,13 @@ var clickonred =function(x){
         body.appendChild(thisisred);
         counter = 0;
         changeFontSet = setInterval(changefont, 1500, thisisred);
+        changeTextSet = setInterval(changetext, 1500, thisisred);
         var defineClearFunction = function(){
             clearFunction(changeFontSet);
+            clearFunction(changeTextSet);
         }
         thisisred.addEventListener("click",defineClearFunction, {once: true});
-        thisisred.addEventListener("click",function(){return floattext(5,200,"thisisred")}, {once: true});
+        thisisred.addEventListener("click",function(){return floattext(5,200,"thisisred","red")}, {once: true});
         thisisred.addEventListener("click",createInput, {once: true});
     },2000);
 }
