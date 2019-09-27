@@ -2,7 +2,7 @@ html, body{
 	background-color: black;
 	height: 100%;
 	width: 100%;
-	display: flex;
+	/*display: flex;*/
 	/*overflow: hidden;*/
 }
 
@@ -12,6 +12,8 @@ html, body{
 }
 
 #menured, #menuredclick{
+	position: absolute;
+	top: 0;
 	width:20vw;
 	height: 100vh;
 	margin-left: 80%;
@@ -49,12 +51,20 @@ html, body{
 	outline: none;
 }
 
+main{
+	position: relative;
+	top: 350px;
+	width: 60vw;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+
 /*This is red text*/
 #thisisred{
 	position: relative;
 	height: 10vh;
 	width: 50vw;
-	display: inline-block;
 	margin: auto;
 	color: white;
 	text-align: center;

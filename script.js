@@ -3,6 +3,7 @@ console.log("Working JS")
 var menured;
 var paragraph = document.querySelector(".loadfont")
 var body = document.body;
+var main = document.querySelector("#main")
 var input;
 var counter = 0;
 var path;
@@ -65,7 +66,7 @@ var floattext = function(speedms,displacementpx,id,currentColor){
             clearInterval(move);
         } else {
             position++;
-            text.style.bottom = position + "px"
+            main.style.top = `${350-position}px`
         }
     }
 }
@@ -74,28 +75,40 @@ var floattext = function(speedms,displacementpx,id,currentColor){
 var createInput = function() {
     setTimeout(function() {
         input = document.createElement("input");
+        //Pass in argument for key pressed and value of text
         input.addEventListener("keypress", function(event){
             key = event.key;
-            return inputFunction(key)
+            reply = event.target.value;
+            return inputFunction(key, reply);
         });
         fadeIn(input,20);
         input.setAttribute('type', 'text');
         input.id = "inputtext";
-        var tir = document.getElementById("thisisred");
-        tir.appendChild(input);
+        // var tir = document.getElementById("thisisred");
+        main.appendChild(input);
     }, 1000);
 }
 
 //Input Function
-var inputFunction = function(key){
+var inputFunction = function(key, reply){
     if(key === 'Enter'){
         console.log("input registers enter!")
+        if(path === 'red'){
+            var output = document.getElementById("thisisred");
+            var x = Math.floor(Math.random()*3);
+            for(var i = 0; i < yesArr.length; i++){
+                if(reply === yesArr[i]){
+                    output.innerHTML = sympathyArr[x];
+                }
+            }
+        }
     }
 }
 
 //When you click on red menu
 var clickonred =function(x){
     red = 255;
+    path = "red";
     var id = this.id;
     this.id = "menuredclick"
     setTimeout(whitescreen, 400);
@@ -103,7 +116,7 @@ var clickonred =function(x){
         var thisisred = document.createElement("p");
         thisisred.id = "thisisred";
         thisisred.innerHTML = "This Is Red.";
-        body.appendChild(thisisred);
+        main.appendChild(thisisred);
         counter = 0;
         changeFontSet = setInterval(changefont, 1500, thisisred);
         changeTextSet = setInterval(changetext, 1500, thisisred);
@@ -137,11 +150,6 @@ function fadeIn(element, speed) {
         opacity += opacity * 0.1;
     }, speed);
 }
-
-
-
-
-
 
 
 //be sure to make a function to loop through the fonts in the array
