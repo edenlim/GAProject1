@@ -1,17 +1,60 @@
 html, body{
-	height: 100%;
-	width: 100%;
-	display: flex;
+	overflow: hidden;
 }
 
-.thisisred{
-	height: 10vh;
-	width: 20vw;
-	display: inline-block;
-	margin: auto;
-	color: red;
-	text-align: center;
-	vertical-align: middle;
-	font-size: 40px;
-	font-weight: bold;
+/* The sidebar menu */
+.sidebar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+  height: 0%; /* 100% Full-height */
+  width: 100%; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Stay on top */
+  bottom: 0;
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
+/* The sidebar links */
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  margin-top: 4%;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  text-align: center;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+  color: #FFF;
+  cursor: pointer;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+  position: absolute;
+  top: 8px;
+  right: 47%;
+  font-size: 36px;
+}
+
+.closebtn{
+	background-color: #111; /* Black*/
+	border: none;
+	color: #818181;
+	margin-bottom: 2%;
+	outline: none;
+}
+
+.closebtn:hover{
+	color: #DDD;
+	cursor: pointer;
 }

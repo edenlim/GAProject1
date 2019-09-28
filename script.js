@@ -1,6 +1,8 @@
 console.log("Working JS")
 //Declare variables
 var menured;
+var menublue;
+var menugreen;
 var paragraph = document.querySelector(".loadfont")
 var body = document.body;
 var main = document.querySelector("#main");
@@ -16,6 +18,8 @@ var acceptInput = false;
 //Makes the screen white
 var whitescreen = function(){
     menured.remove();
+    menublue.remove();
+    menugreen.remove();
     body.style.background = `rgb(${red},${green},${blue})`;
 }
 
@@ -33,13 +37,31 @@ var changefont = function(y){
 }
 
 var changetext = function(y){
-    var num = redWordList.length;
-    random = Math.floor((Math.random()*num));
-    while(x===random){
+    if(path==="red"){
+        var num = redWordList.length;
         random = Math.floor((Math.random()*num));
+        while(x===random){
+            random = Math.floor((Math.random()*num));
+        }
+        x = random;
+        y.innerHTML = redWordList[random];
+    } else if(path==="blue"){
+        var num = blueWordList.length;
+        random = Math.floor((Math.random()*num));
+        while(x===random){
+            random = Math.floor((Math.random()*num));
+        }
+        x = random;
+        y.innerHTML = blueWordList[random];
+    } else if(path==="green"){
+        var num = greenWordList.length;
+        random = Math.floor((Math.random()*num));
+        while(x===random){
+            random = Math.floor((Math.random()*num));
+        }
+        x = random;
+        y.innerHTML = greenWordList[random];
     }
-    x = random;
-    y.innerHTML = redWordList[random];
 }
 
 //Clear function
@@ -84,6 +106,20 @@ var createBoard = function(){
         menured = document.getElementById("menured")
         menured.addEventListener("click", clickonred);
     }
+    if(green != 255){
+        var createGreen = document.createElement("div");
+        createGreen.id = "menugreen"
+        body.appendChild(createGreen);
+        menugreen = document.getElementById("menugreen")
+        menugreen.addEventListener("click", clickongreen);
+    }
+    if(blue != 255){
+        var createBlue = document.createElement("div");
+        createBlue.id = "menublue"
+        body.appendChild(createBlue);
+        menublue = document.getElementById("menublue")
+        menublue.addEventListener("click", clickonblue);
+    }
 }
 
 var floattext = function(speedms,displacementpx,id,currentColor){
@@ -96,13 +132,13 @@ var floattext = function(speedms,displacementpx,id,currentColor){
         },2500);
         setTimeout(greetingFunc,5000);
     } else if(currentColor === "blue"){
-        text.innerHTML = "This is red."
+        text.innerHTML = "This is blue."
         setTimeout(function(){
             text.innerHTML = "Hey."
         },2500);
         setTimeout(greetingFunc,5000);
-    } else if(currentColor === "red"){
-        text.innerHTML = "This is red."
+    } else if(currentColor === "green"){
+        text.innerHTML = "This is green."
         setTimeout(function(){
             text.innerHTML = "Hey."
         },2500);
@@ -227,6 +263,10 @@ var inputFunction = function(key, reply){
                 setTimeout(output.innerHTML = "Look at the time! I'm sorry for holding you back!", 2000)
                 setTimeout(createBoard, 4000);
             }
+        } else if (path === "green"){
+            console.log("Green");
+        } else if (path === "blue"){
+            console.log("Blue");
         }
     }
 }
@@ -255,11 +295,66 @@ var clickonred =function(x){
             clearFunction(changeTextSet);
         }
         thisisred.addEventListener("click",defineClearFunction, {once: true});
-        thisisred.addEventListener("click",function(){return floattext(5,200,"text","red")}, {once: true});
+        thisisred.addEventListener("click",function(){return floattext(5,150,"text","red")}, {once: true});
         thisisred.addEventListener("click",createInput, {once: true});
     },2000);
 }
 
+var clickonblue = function(){
+    blue = 255;
+    path = "blue";
+    var id = this.id;
+    this.id = "menublueclick"
+    setTimeout(whitescreen, 400);
+    setTimeout(function(){
+        var mainDiv = document.createElement("main");
+        mainDiv.id = "main"
+        main = document.querySelector("#main");
+        var thisisblue = document.createElement("p");
+        thisisblue.id = "text";
+        thisisblue.innerHTML = "This Is Blue.";
+        mainDiv.appendChild(thisisblue);
+        body.appendChild(mainDiv);
+        counter = 0;
+        changeFontSet = setInterval(changefont, 1500, thisisblue);
+        changeTextSet = setInterval(changetext, 1500, thisisblue);
+        var defineClearFunction = function(){
+            clearFunction(changeFontSet);
+            clearFunction(changeTextSet);
+        }
+        thisisblue.addEventListener("click",defineClearFunction, {once: true});
+        thisisblue.addEventListener("click",function(){return floattext(5,150,"text","blue")}, {once: true});
+        thisisblue.addEventListener("click",createInput, {once: true});
+    },2000);
+}
+
+var clickongreen = function(){
+    green = 255;
+    path = "green";
+    var id = this.id;
+    this.id = "menugreenclick"
+    setTimeout(whitescreen, 400);
+    setTimeout(function(){
+        var mainDiv = document.createElement("main");
+        mainDiv.id = "main"
+        main = document.querySelector("#main");
+        var thisisgreen = document.createElement("p");
+        thisisgreen.id = "text";
+        thisisgreen.innerHTML = "This Is Green.";
+        mainDiv.appendChild(thisisgreen);
+        body.appendChild(mainDiv);
+        counter = 0;
+        changeFontSet = setInterval(changefont, 1500, thisisgreen);
+        changeTextSet = setInterval(changetext, 1500, thisisgreen);
+        var defineClearFunction = function(){
+            clearFunction(changeFontSet);
+            clearFunction(changeTextSet);
+        }
+        thisisgreen.addEventListener("click",defineClearFunction, {once: true});
+        thisisgreen.addEventListener("click",function(){return floattext(5,150,"text","green")}, {once: true});
+        thisisgreen.addEventListener("click",createInput, {once: true});
+    },2000);
+}
 
 
 
@@ -288,3 +383,38 @@ setTimeout(createBoard, 3000);
 setTimeout(function(){
     clearInterval(loadfontset);
 },2999);
+
+
+function openNav() {
+  document.getElementById("mySidebar").style.height = "100px";
+}
+
+/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+function closeNav() {
+  document.getElementById("mySidebar").style.height = "0";
+}
+
+var closebtn = document.querySelector(".closebtn");
+var endgametext = document.getElementById("endgametext")
+var open = false;
+function click(){
+    console.log("clicked");
+    if(open === false){
+        // endgametext.style.color = "#818181"
+        closebtn.innerHTML = "&darr;";
+        console.log("Opening")
+        openNav();
+        open = true;
+    } else if (open === true){
+        // endgametext.style.color = "#111"
+        closebtn.innerHTML = "&uarr;";
+        closeNav();
+        open = false;
+    }
+}
+
+
+endgametext.addEventListener("click",function(){
+    console.log("End game");
+})
+closebtn.addEventListener("click", click);

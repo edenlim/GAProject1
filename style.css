@@ -9,6 +9,7 @@ html, body{
 .loadfont{
 	color: white;
 	visibility: hidden;
+	position: absolute;
 }
 
 #menured, #menuredclick{
@@ -24,15 +25,63 @@ html, body{
 	cursor: pointer;
 }
 
+#menublue, #menublueclick{
+	position: absolute;
+	top: -65%;
+	left: 15%;
+	width:10vw;
+	height: 200%;
+	margin-left: 20%;
+	background-color: blue;
+	transform: rotate(40deg);
+	text-align: center;
+	cursor: pointer;
+}
+
+#menugreen, #menugreenclick{
+	position: absolute;
+	top: 60%;
+	left: -15%;
+	width:140vw;
+	height: 17vh;
+	/*margin-left: 20%;*/
+	background-color: rgb(0,255,0);
+	transform: rotate(5deg);
+	text-align: center;
+	cursor: pointer;
+}
+
 
 #menured:hover{
-	animation: pulse 2s infinite;
+	animation: pulseRed 2s infinite;
 	animation-timing-function: linear;
+	z-index: 1;
+}
+#menublue:hover{
+	animation: pulseBlue 2s infinite;
+	animation-timing-function: linear;
+	z-index: 1;
+}
+#menugreen:hover{
+	animation: pulseGreen 2s infinite;
+	animation-timing-function: linear;
+	z-index: 1;
 }
 
 #menuredclick{
-	animation: expand 0.5s;
+	animation: expandRed 0.5s;
 	animation-timing-function: linear;
+	z-index: 1;
+}
+#menublueclick{
+	animation: expandBlue 0.5s;
+	animation-timing-function: linear;
+	z-index: 1;
+}
+#menugreenclick{
+	animation: expandGreen 0.5s;
+	animation-timing-function: linear;
+	z-index: 1;
 }
 
 #inputtext{
@@ -74,7 +123,7 @@ main{
 	cursor: pointer;
 }
 
-@keyframes pulse {
+@keyframes pulseRed {
   0% {
   	transform: scale(1)  skewX(60deg);
   }
@@ -85,8 +134,30 @@ main{
   	transform: scale(1) skewX(60deg);
   }
 }
+@keyframes pulseBlue {
+  0% {
+  	transform: scale(1)  rotate(40deg);
+  }
+  50% {
+  	transform: scale(1.1) rotate(40deg);
+  }
+  100% {
+  	transform: scale(1) rotate(40deg);
+  }
+}
+@keyframes pulseGreen {
+  0% {
+  	transform: scale(1) rotate(5deg);
+  }
+  50% {
+  	transform: scale(1.1) rotate(5deg);
+  }
+  100% {
+  	transform: scale(1) rotate(5deg);
+  }
+}
 
-@keyframes expand {
+@keyframes expandRed {
   0% {
   	transform: scale(1)  skewX(60deg);
   }
@@ -97,17 +168,86 @@ main{
   	transform: scale(30) skewX(60deg);
   }
 }
+@keyframes expandBlue {
+  0% {
+  	transform: scale(1)  rotate(40deg);
+  }
+  50% {
+  	transform: scale(10) rotate(40deg);
+  }
+  100% {
+  	transform: scale(30) rotate(40deg);
+  }
+}
+@keyframes expandGreen {
+  0% {
+  	transform: scale(1)  rotate(5deg);
+  }
+  50% {
+  	transform: scale(10) rotate(5deg);
+  }
+  100% {
+  	transform: scale(30) rotate(5deg);
+  }
+}
 
-@keyframes floattop {
-	0%{
-		position: absolute;
-	}
-	50%{
-		position: absolute;
-		top: -10%;
-	}
-	100%{
-		position: absolute;
-		top: -20%;
-	}
+/*html, body{
+	overflow: hidden;
+}*/
+
+/* The sidebar menu */
+.sidebar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+  height: 0%; /* 100% Full-height */
+  width: 100%; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Stay on top */
+  bottom: 0;
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
+/* The sidebar links */
+.sidebar a {
+  /*padding: 8px 8px 8px 32px;*/
+  margin: 2% auto 0;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  text-align: center;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+  color: #FFF;
+  cursor: pointer;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+  position: absolute;
+  top: 8px;
+  right: 49%;
+  font-size: 36px;
+}
+
+.closebtn{
+	background-color: #111; /* Black*/
+	border: none;
+	color: #818181;
+	margin-bottom: 2%;
+	outline: none;
+}
+
+.closebtn:hover{
+	color: #DDD;
+	cursor: pointer;
 }
