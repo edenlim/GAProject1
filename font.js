@@ -18,6 +18,8 @@ var question = {
         { Reply: "It feels like... the world's moving forward too fast...", value: 2 },
         { Reply: "Are you happy? With yourself now?", value: 1 },
         { Reply: "You aren't smiling as often nowadays...", value: 1},
+        { Reply: "Do you feel chained? As if something is holding you back?", value: 1},
+        { Reply: "Do you still dream?", value: 1},
     ],
     work: [
         { Reply: "There's so much to do... but so little time...", value: 2 },
@@ -30,9 +32,31 @@ var question = {
         { Reply: "How's you mother doing?", value: 1},
         { Reply: "How's you father doing?", value: 1},
     ],
+    belief: [
+        { Reply: "How's your family?", value: 2 },
+        { Reply: "Have you visited your family?", value: 1 },
+        { Reply: "How's you mother doing?", value: 1},
+        { Reply: "How's you father doing?", value: 1},
+    ],
+    interest: [
+        { Reply: "How's your family?", value: 2 },
+        { Reply: "Have you visited your family?", value: 1 },
+        { Reply: "How's you mother doing?", value: 1},
+        { Reply: "How's you father doing?", value: 1},
+    ],
+    dream: [
+        { Reply: "How's your family?", value: 2 },
+        { Reply: "Have you visited your family?", value: 1 },
+        { Reply: "How's you mother doing?", value: 1},
+        { Reply: "How's you father doing?", value: 1},
+    ],
+
 }
 
 var questionArr = ["feeling","work","family"]
+var questionBlue = ["belief","work",]; //More stoic
+var questionRed = ["feeling","interest","dream"]; //More Personal
+var questionGreen = ["family","lifestyle",]; //More family
 
 var yesArr = ["yea", "yes", "yup", "i guess", "somewhat", "mmhmm", "mhm", "totally","agreed"];
 var noArr = ["nope","not really","i don't think so", "no", "nah","nae","no way","naw"];
@@ -41,4 +65,23 @@ var positiveArr = ["good","great","fantastic","not bad","not so bad"];
 var sympathyArr = ["Tell me about it.", "C'est la vie, mon ami.", "I'm here."];
 var reliefArr = ["That's good to hear!", "That's a relief...","I'm glad you're doing well.","Fantastic! I'm happy for you!","That's good."];
 var concernArr = ["I hope you take care of yourself more...","Maybe you're busy... but it's important to take care of yourself.","That's too bad to hear...","I wish I could help somehow"];
-var ambiguousArr = ["Right...", "I see...", "Not sure if I get what you mean.","Uhuh..."]
+var ambiguousArr = ["Uh...", "I see...", "Not sure if I get what you mean.","Ummm...","Okay...","Right..."]
+
+
+var musicArr = ["assets/EnnoAareWaterRipples.mp3","assets/QuietResource.mp3","assets/KaineSalvationNieR.mp3","assets/SoulfulFlute.mp3"];
+
+var blackEnd = ["Charismatic.\nIt takes other colors and changes them. It unites different colors by offering depth.","Influence.\nIt changes other colors, leaving its mark on others.","Mysterious.\nBlack is stoic and silent. Simple at first glance, but hides and infinite depth within its abyss."]
+
+var redEnd = ["Bold.\nIt stands out amongst the crowd, the first to draw the attention of everyone.","Adrenaline.\nIt brings alertness, power, and a sense of danger.","Intensity.\nIt's the unrefined and raw energy that courses through everything"]
+
+var blueEnd = ["Charismatic.\nIt takes other colors and changes them. It unites different colors by offering depth.","Influence.\nIt changes other colors, leaving its mark on others.","Mysterious.\nBlack is stoic and silent. Simple at first glance, but hides and infinite depth within its abyss."]
+
+var greenEnd = ["Charismatic.\nIt takes other colors and changes them. It unites different colors by offering depth.","Influence.\nIt changes other colors, leaving its mark on others.","Mysterious.\nBlack is stoic and silent. Simple at first glance, but hides and infinite depth within its abyss."]
+
+var yellowEnd = ["Charismatic.\nIt takes other colors and changes them. It unites different colors by offering depth.","Influence.\nIt changes other colors, leaving its mark on others.","Mysterious.\nBlack is stoic and silent. Simple at first glance, but hides and infinite depth within its abyss."]
+
+var cyanEnd = ["Charismatic.\nIt takes other colors and changes them. It unites different colors by offering depth.","Influence.\nIt changes other colors, leaving its mark on others.","Mysterious.\nBlack is stoic and silent. Simple at first glance, but hides and infinite depth within its abyss."]
+
+var fuchsiaEnd = ["Charismatic.\nIt takes other colors and changes them. It unites different colors by offering depth.","Influence.\nIt changes other colors, leaving its mark on others.","Mysterious.\nBlack is stoic and silent. Simple at first glance, but hides and infinite depth within its abyss."]
+
+var whiteEnd = ["Charismatic.\nIt takes other colors and changes them. It unites different colors by offering depth.","Influence.\nIt changes other colors, leaving its mark on others.","Mysterious.\nBlack is stoic and silent. Simple at first glance, but hides and infinite depth within its abyss."]

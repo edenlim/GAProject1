@@ -20,7 +20,15 @@ var whitescreen = function(){
     menured.remove();
     menublue.remove();
     menugreen.remove();
-    body.style.background = `rgb(${red},${green},${blue})`;
+    if(path === "menu"){
+        body.style.background = `rgb(${red},${green},${blue})`;
+    } else if (path === "red"){
+        body.style.background = `rgb(255,0,0)`;
+    } else if (path === "green"){
+        body.style.background = `rgb(0,255,0)`;
+    } else if (path === "blue"){
+        body.style.background = `rgb(0,0,255)`;
+    }
 }
 
 //Changing fonts. Variable x and random is assigned to make sure no repeats.
@@ -74,9 +82,14 @@ var greetingFunc = function(){
     var replyText = document.getElementById("text");
     var num = question.greeting.length;
     var random = Math.floor((Math.random()*num));
+    console.log("Random number: "+random)
     var greetText = question["greeting"][random]["Reply"];
     currentAttribute = question["greeting"][random]["value"];
     replyText.innerHTML = greetText;
+    //Removes the question after being asked.
+    // var index = question["greeting"][random];
+    // question["greeting"].splice(index,1);
+    // console.log(question["greeting"]);
     acceptInput = true;
 }
 
@@ -91,6 +104,10 @@ var questionFunc = function(){
     var questionText = question[randomquestion][random]["Reply"];
     currentAttribute = question[randomquestion][random]["value"];
     replyText.innerHTML = questionText;
+
+    // var index = question[randomquestion][random];
+    // question[randomquestion].splice(index,1);
+    // console.log(question[randomquestion]);
     acceptInput = true;
 }
 
@@ -99,6 +116,9 @@ var questionFunc = function(){
 var createBoard = function(){
     main = document.querySelector("#main");
     body.removeChild(main);
+    if(path === "menu"){
+        body.style.background = `rgb(${red},${green},${blue})`;
+    }
     if(red != 255){
         var createRed = document.createElement("div");
         createRed.id = "menured"
@@ -126,19 +146,25 @@ var floattext = function(speedms,displacementpx,id,currentColor){
     var main = document.querySelector("#main");
     var text = document.getElementById(id);
     if(currentColor === "red"){
-        text.innerHTML = "This is red."
+        fire.muted = false;
+        fire.play();
+        text.innerHTML = "This is Red."
         setTimeout(function(){
             text.innerHTML = "Hey."
         },2500);
         setTimeout(greetingFunc,5000);
     } else if(currentColor === "blue"){
-        text.innerHTML = "This is blue."
+        water.muted = false;
+        water.play();
+        text.innerHTML = "This is Blue."
         setTimeout(function(){
             text.innerHTML = "Hey."
         },2500);
         setTimeout(greetingFunc,5000);
     } else if(currentColor === "green"){
-        text.innerHTML = "This is green."
+        grass.muted = false;
+        grass.play();
+        text.innerHTML = "This is Green."
         setTimeout(function(){
             text.innerHTML = "Hey."
         },2500);
@@ -163,7 +189,8 @@ var createInput = function() {
         //Pass in argument for key pressed and value of text
         input.addEventListener("keypress", function(event){
             key = event.key;
-            reply = event.target.value;
+            var replytext = event.target.value;
+            reply = replytext.toLowerCase();
             return inputFunction(key, reply);
         });
         fadeIn(input,20);
@@ -172,6 +199,13 @@ var createInput = function() {
         var main = document.querySelector("#main");
         main.appendChild(input);
     }, 1000);
+}
+
+var checkAmbi = function(){
+    var output = document.getElementById("text");
+    var num = ambiguousArr.length;
+    var x = Math.floor(Math.random()*num);
+    output.innerHTML = ambiguousArr[x];
 }
 
 //Input Function, for when the user press enter
@@ -184,8 +218,87 @@ var inputFunction = function(key, reply){
             var output = document.getElementById("text");
             if(convocounter <5 ){
                 convocounter++;
-                var x = Math.floor(Math.random()*3);
-                console.log(`random x: ${x}`)
+                setTimeout(questionFunc, 2000);
+                //Check which TYPE of question asked
+                switch(currentAttribute){
+                    //Input set timeout for rolling of question?
+                    case 1:
+                        // var num = ambiguousArr.length;
+                        // var x = Math.floor(Math.random()*num);
+                        // output.innerHTML = ambiguousArr[x];
+                        checkAmbi();
+                        for(var i = 0; i < yesArr.length; i++){
+                            if(reply === yesArr[i]){
+                                var num = reliefArr.length;
+                                var x = Math.floor(Math.random()*num);
+                                output.innerHTML = reliefArr[x];
+                                console.log("case1")
+                                break;
+                            }
+                        }
+                        for(var i = 0; i < noArr.length; i++){
+                            if (reply === noArr[i]){
+                                var num = concernArr.length;
+                                var x = Math.floor(Math.random()*num);
+                                output.innerHTML = concernArr[x];
+                                console.log("case1")
+                                break;
+                            }
+                        }
+
+                        // console.log("Hello")
+                        break;
+
+
+                    case 2:
+                        // var num = ambiguousArr.length;
+                        // var x = Math.floor(Math.random()*num);
+                        // output.innerHTML = ambiguousArr[x];
+                        checkAmbi();
+                        for(var i = 0; i < yesArr.length; i++){
+                            if(reply === yesArr[i]){
+                                var num = reliefArr.length;
+                                var x = Math.floor(Math.random()*num);
+                                output.innerHTML = reliefArr[x];
+                                console.log("case2")
+                                break;
+                            }
+                        }
+                        for(var i = 0; i < noArr.length; i++){
+                            if (reply === noArr[i]){
+                                var num = concernArr.length;
+                                var x = Math.floor(Math.random()*num);
+                                output.innerHTML = concernArr[x];
+                                console.log("case2")
+                                break;
+                            }
+                        }
+                        break;
+
+
+                    //If answer doesn't matches
+                    // default:
+                    //     console.log("case3")
+                    //     var num = ambiguousArr.length;
+                    //     var x = Math.floor(Math.random()*num);
+                    //     output.innerHTML = ambiguousArr[x];
+
+                }
+            } else {
+                convocounter = 0;
+                path = "menu";
+                output.innerHTML = "I'm sure it will all work out for you."
+                setTimeout(function(){
+                    output.innerHTML = "Look at the time! I'm sorry for holding you back!"
+                    fire.muted = true;
+                }, 2500)
+                setTimeout(createBoard, 5000);
+            }
+        } else if (path === "green"){
+            console.log("Green");
+            var output = document.getElementById("text");
+            if(convocounter <5 ){
+                convocounter++;
                 setTimeout(questionFunc, 2000);
 
                 //Check which TYPE of question asked
@@ -253,20 +366,100 @@ var inputFunction = function(key, reply){
                     //     var x = Math.floor(Math.random()*num);
                     //     output.innerHTML = ambiguousArr[x];
 
-
-
-                    console.log("Hi! I'm beyond All the CASES!")
                 }
             } else {
                 convocounter = 0;
-                output.innerHTML = "I'm sure it will work out for you."
-                setTimeout(output.innerHTML = "Look at the time! I'm sorry for holding you back!", 2000)
-                setTimeout(createBoard, 4000);
+                path = "menu";
+                output.innerHTML = "I'm sure it will all work out for you."
+                setTimeout(function(){
+                    output.innerHTML = "Look at the time! I'm sorry for holding you back!"
+                    grass.muted = true;
+                }, 2500)
+                setTimeout(createBoard, 5000);
             }
-        } else if (path === "green"){
-            console.log("Green");
         } else if (path === "blue"){
             console.log("Blue");
+            var output = document.getElementById("text");
+            if(convocounter <5 ){
+                convocounter++;
+                setTimeout(questionFunc, 2000);
+
+                //Check which TYPE of question asked
+                switch(currentAttribute){
+                    //Input set timeout for rolling of question?
+                    case 1:
+                        console.log("case3")
+                        var num = ambiguousArr.length;
+                        var x = Math.floor(Math.random()*num);
+                        output.innerHTML = ambiguousArr[x];
+                        for(var i = 0; i < yesArr.length; i++){
+                            if(reply === yesArr[i]){
+                                var num = reliefArr.length;
+                                var x = Math.floor(Math.random()*num);
+                                output.innerHTML = reliefArr[x];
+                                console.log("case1")
+                                break;
+                            }
+                        }
+                        for(var i = 0; i < noArr.length; i++){
+                            if (reply === noArr[i]){
+                                var num = concernArr.length;
+                                var x = Math.floor(Math.random()*num);
+                                output.innerHTML = concernArr[x];
+                                console.log("case1")
+                                break;
+                            }
+                        }
+
+                        // console.log("Hello")
+                        break;
+
+
+                    case 2:
+                        console.log("case3")
+                        var num = ambiguousArr.length;
+                        var x = Math.floor(Math.random()*num);
+                        output.innerHTML = ambiguousArr[x];
+                        for(var i = 0; i < yesArr.length; i++){
+                            if(reply === yesArr[i]){
+                                var num = reliefArr.length;
+                                var x = Math.floor(Math.random()*num);
+                                output.innerHTML = reliefArr[x];
+                                console.log("case2")
+                                break;
+                            }
+                        }
+                        for(var i = 0; i < noArr.length; i++){
+                            if (reply === noArr[i]){
+                                var num = concernArr.length;
+                                var x = Math.floor(Math.random()*num);
+                                output.innerHTML = concernArr[x];
+                                console.log("case2")
+                                break;
+                            }
+                        }
+
+                        break;
+
+
+                    //If answer doesn't matches
+                    // default:
+                    //     console.log("case3")
+                    //     var num = ambiguousArr.length;
+                    //     var x = Math.floor(Math.random()*num);
+                    //     output.innerHTML = ambiguousArr[x];
+
+                }
+            } else {
+                convocounter = 0;
+                path = "menu";
+                output.innerHTML = "I'm sure it will all work out for you."
+                setTimeout(function(){
+                    output.innerHTML = "Look at the time! I'm sorry for holding you back!"
+                    water.muted = true;
+                }, 2500)
+                setTimeout(createBoard, 5000);
+            }
         }
     }
 }
@@ -413,8 +606,152 @@ function click(){
     }
 }
 
-
+//Click on End game to end the game
 endgametext.addEventListener("click",function(){
-    console.log("End game");
+    var child = body.lastElementChild;
+    while (child){
+        body.removeChild(child);
+        child = body.lastElementChild
+    }
+    setTimeout(function(){
+        var mainDiv = document.createElement("main");
+        mainDiv.id = "main"
+        main = document.querySelector("#main");
+        var para = document.createElement("p");
+        para.id = "text";
+        para.innerHTML = "This is End.";
+        mainDiv.appendChild(para);
+        body.appendChild(mainDiv);
+        setTimeout(function(){
+            checkEnd();
+        },2500)
+    },2000)
 })
+
 closebtn.addEventListener("click", click);
+
+
+//Use this to check the current ending of the game
+var checkEnd = function(){
+    body.style.background = `rgb(${red},${green},${blue})`;
+    var text = document.querySelector("#text");
+    var main = document.querySelector("#main");
+    music();
+
+    if(red === 0 && blue === 0 && green === 0){
+        text.innerHTML = "Black is..."
+        var newtext = document.createElement("p");
+        newtext.id = "text";
+        var num = blackEnd.length;
+        random = Math.floor((Math.random()*num));
+        newtext.innerHTML = blackEnd[random];
+        fadeIn(newtext,20);
+        main.appendChild(newtext)
+    } else if (red === 255 && blue === 0 && green === 0){
+        text.innerHTML = "Red is..."
+        var newtext = document.createElement("p");
+        newtext.id = "text";
+        var num = redEnd.length;
+        random = Math.floor((Math.random()*num));
+        newtext.innerHTML = redEnd[random];
+        fadeIn(newtext,20);
+        main.appendChild(newtext)
+    } else if (red === 0 && blue === 255 && green === 0){
+        text.innerHTML = "Blue is..."
+        var newtext = document.createElement("p");
+        newtext.id = "text";
+        var num = blueEnd.length;
+        random = Math.floor((Math.random()*num));
+        newtext.innerHTML = blueEnd[random];
+        fadeIn(newtext,20);
+        main.appendChild(newtext)
+    } else if (red === 0 && blue === 0 && green === 255){
+        text.innerHTML = "Green is..."
+        var newtext = document.createElement("p");
+        newtext.id = "text";
+        var num = greenEnd.length;
+        random = Math.floor((Math.random()*num));
+        newtext.innerHTML = greenEnd[random];
+        fadeIn(newtext,20);
+        main.appendChild(newtext)
+    } else if (red === 255 && blue === 255 && green === 0){
+        text.innerHTML = "Fuchsia is..."
+        var newtext = document.createElement("p");
+        newtext.id = "text";
+        var num = fuchsiaEnd.length;
+        random = Math.floor((Math.random()*num));
+        newtext.innerHTML = fuchsiaEnd[random];
+        fadeIn(newtext,20);
+        main.appendChild(newtext)
+    }  else if (red === 255 && blue === 0 && green === 255){
+        text.innerHTML = "Yellow is..."
+        var newtext = document.createElement("p");
+        newtext.id = "text";
+        var num = yellowEnd.length;
+        random = Math.floor((Math.random()*num));
+        newtext.innerHTML = yellowEnd[random];
+        fadeIn(newtext,20);
+        main.appendChild(newtext)
+    } else if (red === 0 && blue === 255 && green === 255){
+        text.innerHTML = "Cyan is..."
+        var newtext = document.createElement("p");
+        newtext.id = "text";
+        var num = cyanEnd.length;
+        random = Math.floor((Math.random()*num));
+        newtext.innerHTML = cyanEnd[random];
+        fadeIn(newtext,20);
+        main.appendChild(newtext)
+    } else if (red === 255 && blue === 255 && green === 255){
+        text.innerHTML = "White is..."
+        var newtext = document.createElement("p");
+        newtext.id = "text";
+        var num = whiteEnd.length;
+        random = Math.floor((Math.random()*num));
+        newtext.innerHTML = whiteEnd[random];
+        fadeIn(newtext,20);
+        main.appendChild(newtext)
+    }
+
+    //The ending
+    newtext.addEventListener("click",function(){
+
+        setTimeout(function(){
+            main.removeChild(text);
+            newtext.innerHTML = "What are you?";
+        },1000);
+        var music = document.getElementById("music");
+        setTimeout(function(){
+            let opacity = 1;
+            let volume = 0.3
+            const vtimer = setInterval(function(){
+                if (volume <= 0.0) {
+                    clearInterval(vtimer)
+                }
+                music.volume = volume;
+                volume -= volume * 0.01;
+            },50)
+            const timer = setInterval(function() {
+                if (opacity <= 0.0) {
+                    clearInterval(timer);
+                }
+                newtext.style.opacity = opacity;
+                newtext.style.filter = `aplha(opacity=${opacity * 100})`;
+                opacity -= opacity * 0.03;
+            }, 50);
+        },3000);
+    },{once:true})
+}
+
+
+
+var music = function(){
+    var randommusicnum = Math.floor(Math.random()*musicArr.length)
+    var randommusic = musicArr[randommusicnum];
+    var music1 = document.createElement('audio');
+    body.appendChild(music1);
+    music1.id = "music";
+    music1.src = randommusic;
+    music1.volume = 0.3;
+    music1.play();
+    music1.loop = true;
+}
