@@ -108,10 +108,9 @@ var greetingFunc = function(){
     var greetText = question["greeting"][random]["Reply"];
     currentAttribute = question["greeting"][random]["value"];
     replyText.innerHTML = greetText;
-    //Removes the question after being asked.
-    // var index = question["greeting"][random];
-    // question["greeting"].splice(index,1);
-    // console.log(question["greeting"]);
+    // Removes the question after being asked.
+    question["greeting"].splice(random,1);
+    console.log(question["greeting"]);
     acceptInput = true;
 }
 
@@ -127,9 +126,8 @@ var questionFunc = function(){
     currentAttribute = question[randomquestion][random]["value"];
     replyText.innerHTML = questionText;
 
-    // var index = question[randomquestion][random];
-    // question[randomquestion].splice(index,1);
-    // console.log(question[randomquestion]);
+    question[randomquestion].splice(random,1);
+    console.log(question[randomquestion]);
     acceptInput = true;
 }
 

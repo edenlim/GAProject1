@@ -6,25 +6,71 @@ var greenWordList = ["Tree","Leaf","Forest","Nature","Fresh","Sick","Verdant","L
 
 var blueWordList = ["Cynical","Water","Sadness","Calm","Sky","Depression","Still","Tranquil","Deep","Mysterious","Sea","Sky","Freedom","Expansive","Remote","Aloof","Azure","Wise","Smart","Mechanical","Cold","Ice","Distant","Melancholy","Alone","Solitary","Deserted","Calculative","Bold","Conservative"]
 
-// var greeting = ["Tough week huh?", "Have you eaten yet?", "You alright, mate?"];
 
 var question = {
     greeting: [
         { Reply: "Are you doing well?", value: 1 },
         { Reply: "Have you eaten yet?", value: 1 },
         { Reply: "You alright man?", value: 1},
+        { Reply: "You doing good?", value: 1 }
     ],
-    feeling: [
-        { Reply: "It feels like... the world's moving forward too fast...", value: 2 },
-        { Reply: "Are you happy? With yourself now?", value: 1 },
-        { Reply: "You aren't smiling as often nowadays...", value: 1},
-        { Reply: "Do you feel chained? As if something is holding you back?", value: 1},
-        { Reply: "Do you still dream?", value: 1},
+    belief: [
+        { Reply: "Sometimes, I feel that lying is inevitable. Would you lie for a good cause?", value: 2 },
+        { Reply: "Life sometimes feels... aimless... Still, do you want to live forever?", value: 1 },
+        { Reply: "Would you still set out doing something, knowing you will fail?", value: 1},
+        { Reply: "I sometimes feel ashamed, thinking I could be doing more for those suffering. Do you feel the same?", value: 1},
+        { Reply: "Sometimes it feels like we have a lot of choices, but it still feel so restricted...", value: 1},
+        { Reply: "Would you stand for your own believes, even if everyone opposes your idea?", value: 1},
     ],
     work: [
         { Reply: "There's so much to do... but so little time...", value: 2 },
         { Reply: "It's been tough at work recently...", value: 1 },
-        { Reply: "Don't overwork yourself", value: 1},
+        { Reply: "Hey, work may be important, but don't overwork yourself", value: 1},
+        { Reply: "Is there anyone at work that is bothering you?", value: 1},
+        { Reply: "Maybe you should take a break...", value: 1},
+        { Reply: "Are you doing what you love?", value: 1},
+        { Reply: "Work feels monotonous... Don't you feel like doing something else?", value: 1},
+    ],
+    future: [
+        { Reply: "I know, sometimes, you feel lost in life...", value: 2 },
+        { Reply: "The future is so unpredictable... it scares me.", value: 1 },
+        { Reply: "Are you hopeful about the future? Your future?", value: 1},
+        { Reply: "I used to hate it when my parents shares their advice... but now... it's different.", value: 1},
+        { Reply: "Don't you think that life used to be simpler?", value: 1},
+    ],
+    mental: [
+        { Reply: "Recently it feels like there's no reason in getting out of bed...", value: 2 },
+        { Reply: "It feels so hard to open up your feelings...", value: 1 },
+        { Reply: "I'm afraid that people would judge me for who I am... Do you feel the same?", value: 1},
+        { Reply: "Its not so easy to carry on...", value: 1},
+        { Reply: "Life feels so difficult... but don't give up.", value: 1},
+    ],
+    feeling: [
+        { Reply: "Do you have any lingering regrets?", value: 2 },
+        { Reply: "Are you happy? With yourself now?", value: 1 },
+        { Reply: "You aren't smiling as often nowadays...", value: 2},
+        { Reply: "Recently I feel empty... Do you?", value: 2},
+        { Reply: "Life's full of opportunity, don't you think?", value: 2 },
+        { Reply: "You look great today!", value: 1 },
+    ],
+    interest: [
+        { Reply: "Have you enjoyed yourself?", value: 2 },
+        { Reply: "Do you have something you enjoy doing?", value: 1 },
+        { Reply: "There's so little me time nowadays...", value: 1},
+        { Reply: "Do you have anyone that shares the same interest as you?", value: 1},
+        { Reply: "There's so little me time nowadays...", value: 1},
+    ],
+    dream: [
+        { Reply: "Do you still continue dreaming?", value: 2 },
+        { Reply: "Have you achieve your dreams?", value: 1 },
+        { Reply: "Some days, I can't face myself in the mirror. Can you?", value: 1},
+        { Reply: "How's you father doing?", value: 1},
+    ],
+    physical: [
+        { Reply: "How's your family?", value: 2 },
+        { Reply: "Have you visited your family?", value: 1 },
+        { Reply: "How's you mother doing?", value: 1},
+        { Reply: "How's you father doing?", value: 1},
     ],
     family: [
         { Reply: "How's your family?", value: 2 },
@@ -32,19 +78,13 @@ var question = {
         { Reply: "How's you mother doing?", value: 1},
         { Reply: "How's you father doing?", value: 1},
     ],
-    belief: [
-        { Reply: "How's your family?", value: 2 },
+    lifestyle: [
+        { Reply: "Do you feel chained? As if something is holding you back?", value: 2 },
         { Reply: "Have you visited your family?", value: 1 },
         { Reply: "How's you mother doing?", value: 1},
         { Reply: "How's you father doing?", value: 1},
     ],
-    interest: [
-        { Reply: "How's your family?", value: 2 },
-        { Reply: "Have you visited your family?", value: 1 },
-        { Reply: "How's you mother doing?", value: 1},
-        { Reply: "How's you father doing?", value: 1},
-    ],
-    dream: [
+    spiritual: [
         { Reply: "How's your family?", value: 2 },
         { Reply: "Have you visited your family?", value: 1 },
         { Reply: "How's you mother doing?", value: 1},
@@ -53,10 +93,10 @@ var question = {
 
 }
 
-var questionArr = ["feeling","work","family"]
-var questionBlue = ["belief","work",]; //More stoic
-var questionRed = ["feeling","interest","dream"]; //More Personal
-var questionGreen = ["family","lifestyle",]; //More family
+var questionArr = ["feeling","work","family"] //Will be erased.
+var questionBlue = ["belief","work","future","mental"]; //More stoic
+var questionRed = ["feeling","interest","dream","physical"]; //More Personal
+var questionGreen = ["family","lifestyle","spiritual"]; //More family
 
 var yesArr = ["yea", "yes", "yup", "i guess", "somewhat", "mmhmm", "mhm", "totally","agreed", "ya"];
 var noArr = ["nope","not really","i don't think so", "no", "nah","nae","no way","naw"];
