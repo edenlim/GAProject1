@@ -115,22 +115,25 @@ var questionFunc = function(){
     var replyText = document.getElementById("text");
     if(path === "red"){
         var numquestion = questionRed.length;
+        var questionArr = questionRed;
     } else if (path === "blue"){
         var numquestion = questionBlue.length;
+        var questionArr = questionBlue;
     } else if (path === "green"){
         var numquestion = questionGreen.length;
+        var questionArr = questionGreen;
     }
+    console.log("Theme of question: "+ questionArr)
     var rng1 = Math.floor((Math.random()*numquestion));
     var randomquestion = questionArr[rng1];
     var num = question[randomquestion].length;
-    // var num = question.greeting.length;
     var random = Math.floor((Math.random()*num));
     var questionText = question[randomquestion][random]["Reply"];
     currentAttribute = question[randomquestion][random]["value"];
     replyText.innerHTML = questionText;
 
     question[randomquestion].splice(random,1);
-    console.log(question[randomquestion]);
+    console.log("Which type asked: "+question[randomquestion]);
     acceptInput = true;
 }
 
@@ -170,6 +173,7 @@ var floattext = function(speedms,displacementpx,id,currentColor){
     var text = document.getElementById(id);
     if(currentColor === "red"){
         fire.muted = false;
+        fire.volume = 0.1;
         fire.play();
         text.innerHTML = "This is Red."
         setTimeout(function(){
@@ -178,6 +182,7 @@ var floattext = function(speedms,displacementpx,id,currentColor){
         setTimeout(greetingFunc,5000);
     } else if(currentColor === "blue"){
         water.muted = false;
+        water.volume = 0.1;
         water.play();
         text.innerHTML = "This is Blue."
         setTimeout(function(){
@@ -186,6 +191,7 @@ var floattext = function(speedms,displacementpx,id,currentColor){
         setTimeout(greetingFunc,5000);
     } else if(currentColor === "green"){
         grass.muted = false;
+        grass.volume = 0.1;
         grass.play();
         text.innerHTML = "This is Green."
         setTimeout(function(){
@@ -232,7 +238,7 @@ var checkAmbi = function(){
 }
 
 
-var check = function(reply, arr1, arr2) {
+var check = function(reply, arr1, arr2, positive) {
     var output = document.getElementById("text");
     for (var i = 0; i < arr1.length; i++) {
         if (reply === arr1[i]) {
@@ -250,10 +256,11 @@ var inputFunction = function(key, reply){
         event.target.value = "";
         acceptInput === false;
         console.log("input registers enter!")
+        var output = document.getElementById("text");
 
         if(convocounter <5 ){
             convocounter++;
-            setTimeout(questionFunc, 2000);
+            setTimeout(questionFunc, 3500);
             //Check which TYPE of question asked
             switch(currentAttribute){
                 //Input set timeout for rolling of question?
@@ -261,39 +268,59 @@ var inputFunction = function(key, reply){
                     checkAmbi();
                     check(reply, yesArr,reliefArr);
                     check(reply,noArr,concernArr);
+                    check(reply,unsureArr,unsureRespond);
                     break;
                 case 2:
                     checkAmbi();
                     check(reply,yesArr,yesAgree);
                     check(reply,noArr,noAgree);
+                    check(reply,unsureArr,unsureRespond);
                     break;
 
                 case 3:
                     checkAmbi();
                     check(reply,yesArr,timeMArr);
                     check(reply,noArr,praiseArr);
+                    check(reply,unsureArr,unsureRespond);
                     break;
                 case 4:
                     checkAmbi();
                     check(reply,yesArr,directionMArr);
                     check(reply,noArr,praiseArr);
+                    check(reply,unsureArr,unsureRespond);
                     break;
                 case 5:
                     checkAmbi();
                     check(reply,yesArr,workMArr);
                     check(reply,noArr,praiseArr);
+                    check(reply,unsureArr,unsureRespond);
                     break;
 
                 case 6:
                     checkAmbi();
                     check(reply,yesArr,pastMArr);
                     check(reply,noArr,surpriseArr);
+                    check(reply,unsureArr,unsureRespond);
                     break;
 
                 case 7:
                     checkAmbi();
                     check(reply,yesArr,emotionMArr);
                     check(reply,noArr,praiseArr);
+                    check(reply,unsureArr,unsureRespond);
+                    break;
+
+                case 8:
+                    checkAmbi();
+                    check(reply,yesArr,dreamArr);
+                    check(reply,noArr,adviceArr);
+                    check(reply,unsureArr,unsureRespond);
+                    break;
+                case 9:
+                    checkAmbi();
+                    check(reply, yesArr,concernArr);
+                    check(reply,noArr,reliefArr);
+                    check(reply,unsureArr,unsureRespond);
                     break;
             }
         } else {
@@ -304,7 +331,7 @@ var inputFunction = function(key, reply){
                 setTimeout(function(){
                     output.innerHTML = "It has been nice hearing from you. I know you'll stay strong."
                     fire.muted = true;
-                }, 2500)
+                }, 3500)
             } else if (path === "blue"){
                 convocounter = 0;
                 path = "menu";
@@ -312,7 +339,7 @@ var inputFunction = function(key, reply){
                 setTimeout(function(){
                     output.innerHTML = "It's about time we part ways. I hope you'll have a better tomorrow."
                     water.muted = true;
-                }, 2500)
+                }, 3500)
             } else if (path === "green"){
                 convocounter = 0;
                 path = "menu";
@@ -320,9 +347,9 @@ var inputFunction = function(key, reply){
                 setTimeout(function(){
                     output.innerHTML = "This conversation has been pleasant. I'll always be here if you need me."
                     grass.muted = true;
-                }, 2500)
+                }, 3500)
             }
-            setTimeout(createBoard, 6000);
+            setTimeout(createBoard, 6500);
         }
     }
 }
@@ -571,7 +598,7 @@ var music = function(){
     body.appendChild(music1);
     music1.id = "music";
     music1.src = randommusic;
-    music1.volume = 0.3;
+    music1.volume = 0.2;
     music1.play();
     music1.loop = true;
 }
