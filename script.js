@@ -439,11 +439,6 @@ var clickongreen = function(){
     },2000);
 }
 
-
-
-
-
-
 //Terence code for fade in
 function fadeIn(element, speed) {
     element.style.opacity = 0;
