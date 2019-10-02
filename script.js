@@ -9,7 +9,7 @@ var main = document.querySelector("#main");
 var input;
 var convocounter = 0;
 var path;
-var red = 0;
+var red = 255;
 var green = 0;
 var blue = 0;
 var currentAttribute;
@@ -179,7 +179,7 @@ var floattext = function(speedms,displacementpx,id,currentColor){
         setTimeout(function(){
             text.innerHTML = "Hey."
         },2500);
-        setTimeout(greetingFunc,5000);
+        setTimeout(greetingFunc,3200);
     } else if(currentColor === "blue"){
         water.muted = false;
         water.volume = 0.1;
@@ -188,7 +188,7 @@ var floattext = function(speedms,displacementpx,id,currentColor){
         setTimeout(function(){
             text.innerHTML = "Hey."
         },2500);
-        setTimeout(greetingFunc,5000);
+        setTimeout(greetingFunc,3200);
     } else if(currentColor === "green"){
         grass.muted = false;
         grass.volume = 0.1;
@@ -197,7 +197,7 @@ var floattext = function(speedms,displacementpx,id,currentColor){
         setTimeout(function(){
             text.innerHTML = "Hey."
         },2500);
-        setTimeout(greetingFunc,5000);
+        setTimeout(greetingFunc,3200);
     }
     var position = 0;
     var move = setInterval(frame,speedms);
@@ -504,6 +504,9 @@ endgametext.addEventListener("click",function(){
         main = document.querySelector("#main");
         var para = document.createElement("p");
         para.id = "text";
+        if(red === 255 && green === 255){
+            para.style.textShadow = "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
+        }
         para.innerHTML = "This is End.";
         mainDiv.appendChild(para);
         body.appendChild(mainDiv);
@@ -523,6 +526,9 @@ var checkEndf = function(textis,arrEnd){
     var newtext = document.createElement("p");
     newtext.id = "text";
     newtext.classList.add("IAMNEW");
+    if(red === 255 && green === 255){
+        newtext.style.textShadow = "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
+    }
     var num = arrEnd.length;
     random = Math.floor((Math.random()*num));
     newtext.innerHTML = arrEnd[random];
@@ -548,10 +554,12 @@ var checkEnd = function(){
     } else if (red === 255 && blue === 255 && green === 0){
         checkEndf("Fuchsia is...",fuchsiaEnd);
     }  else if (red === 255 && blue === 0 && green === 255){
+        text.style.textShadow = "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
         checkEndf("Yellow is...",yellowEnd);
     } else if (red === 0 && blue === 255 && green === 255){
         checkEndf("Cyan is...",cyanEnd);
     } else if (red === 255 && blue === 255 && green === 255){
+        text.style.textShadow = "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
         checkEndf("White is...",whiteEnd);
     }
 
