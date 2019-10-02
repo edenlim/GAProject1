@@ -9,7 +9,7 @@ var main = document.querySelector("#main");
 var input;
 var convocounter = 0;
 var path;
-var red = 255;
+var red = 0;
 var green = 0;
 var blue = 0;
 var currentAttribute;
